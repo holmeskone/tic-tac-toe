@@ -36,9 +36,9 @@ const gameBoard = (function(){
     return initialBoard;
     }
 
-    function currentBoard(text){
-        let playingBoard = startBoard();
-        playingBoard[1][1]=(text);
+    let playingBoard = startBoard();
+    function currentBoard(row,cell,symbol){
+        playingBoard[row][cell]=(symbol);
         console.log(playingBoard);
     }
 
@@ -49,27 +49,49 @@ const gameBoard = (function(){
 }) ();
 
 
-// const updatedBoard = gameBoard.currentBoard('nile');
-
 
 //Create users
 function player(user,symbol){
+    const movements = [];
     return {
         user: user,
         symbol: symbol,
+        // turn: function(){
+        //     histMovements.push(this.user);
+        //     console.log(histMovements);
+        //     for (i=0; i<4; i++){
+        //         if(this.user === 1){
+        //             player1.movement();
+        //             console.log(i);
+        //             }
+        //         else{
+        //             player2.movement();
+        //             console.log(i);
+        //             }
+        //         }
+        // },
         movement: function(){
-            let move = prompt('Enter a word');
-            gameBoard.currentBoard(move);
-        }
-//     movement: function () {
-//         let move = prompt('What is your move?');
-//         console.log(`Your move is ${move}`)
-// }
-}
+            let row = prompt('What row?');
+            let cell = prompt('What cell?');            
+            gameBoard.currentBoard(row,cell,symbol);
+            console.log(`Player ${user} chose row ${row} and cell ${cell}`);
+            histMovements = movements.push(user);
+            console.log(histMovements);
+            // for (i=0; i<4; i++){
+            //     if(this.user === 1){
+            //         player2.turn();
+            //         console.log(i);
+            //         }
+            //     else{
+            //         player1.turn();
+            //         console.log(i);
+            //         }
+            // }
+        },
+    }
 }
 const player1 = player(1,'X');
-player1.movement();
-
+const player2 = player(2,'O');
 
 
 // function movement(user, cell){
