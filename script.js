@@ -37,7 +37,7 @@ const gameBoard = (function(){
     }
 
     let playingBoard = startBoard();
-    function currentBoard(row,cell,symbol){
+    function currentBoard(user, row,cell,symbol){
         if(playingBoard[row][cell]!=''){
             console.log('Cell already taken');
         }
@@ -45,6 +45,24 @@ const gameBoard = (function(){
             playingBoard[row][cell]=(symbol);
         }
         console.log(playingBoard);
+        winnerChecker(user, symbol);
+    }
+
+    function winnerChecker(user, symbol){
+        let j = 0;
+        //Diagonal Winner
+        if (playingBoard[j][j] === symbol && playingBoard[j+1][j+1] === symbol && playingBoard[j+2][j+2] === symbol){
+            console.log(`Player ${user} wins with ${symbol}`)
+        }
+        for(i = 0; i<3; i++){
+                //Row Winner
+                if(playingBoard[i][j] === symbol && playingBoard[i][j+1] === symbol && playingBoard[i][j+2] === symbol){
+                    console.log(`Player ${user} wins with ${symbol}`)}
+                //Column Winner
+                else if (playingBoard[j][i] === symbol && playingBoard[j+1][i] === symbol && playingBoard[j+2][i] === symbol){
+                console.log(`Player ${user} wins with ${symbol}`)
+                }
+        }
     }
 
     return{
@@ -61,24 +79,10 @@ function player(user,symbol){
     return {
         user: user,
         symbol: symbol,
-        // turn: function(){
-        //     histMovements.push(this.user);
-        //     console.log(histMovements);
-        //     for (i=0; i<4; i++){
-        //         if(this.user === 1){
-        //             player1.movement();
-        //             console.log(i);
-        //             }
-        //         else{
-        //             player2.movement();
-        //             console.log(i);
-        //             }
-        //         }
-        // },
         movement: function(){
             let row = prompt('What row?');
             let cell = prompt('What cell?');            
-            gameBoard.currentBoard(row,cell,symbol);
+            gameBoard.currentBoard(user, row,cell,symbol);
             console.log(`Player ${user} chose row ${row} and cell ${cell}`);
             histMovements = movements.push(user);
             console.log(histMovements);
