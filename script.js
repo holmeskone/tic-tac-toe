@@ -30,7 +30,7 @@ const gameBoard = (function(){
         for (i=0; i<rows; i++){
             initialBoard[i] = [];
             for (j=0; j<columns; j++){
-                initialBoard[i].push(['test'+i+j]);
+                initialBoard[i].push(['']);
         };
     };
     return initialBoard;
@@ -38,7 +38,12 @@ const gameBoard = (function(){
 
     let playingBoard = startBoard();
     function currentBoard(row,cell,symbol){
-        playingBoard[row][cell]=(symbol);
+        if(playingBoard[row][cell]!=''){
+            console.log('Cell already taken');
+        }
+        else{
+            playingBoard[row][cell]=(symbol);
+        }
         console.log(playingBoard);
     }
 
