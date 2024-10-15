@@ -1,0 +1,54 @@
+:root{
+    background-color: aliceblue;
+}
+
+/*Prevent any scrolling*/
+html, body {
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden
+}
+
+/*The main section of the page*/
+#container{
+    display: grid;
+    grid-template-rows: 1fr 4fr 2.5fr;
+}
+/*The title*/
+#game-title{
+    font-size: 1.5rem;
+    display: flex;
+    color: black;
+    justify-content: center;
+}
+
+/*The board*/
+#game-board{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+/*Each Row*/
+.game-row{
+    display: flex;
+}
+/*Each Cell*/
+.game-row .cell {
+    height: 20vh;
+    width: 15vw;
+    background-color: orange;
+    border-width: 3px;
+    border:1px solid black;
+}
+
+/*Score board*/
+#game-information{
+    display: grid;
+    
+}
+
+#game-counter{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+}
