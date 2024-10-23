@@ -31,6 +31,7 @@ const gameBoard = (function(){
 
     function winnerChecker(user, symbol){
         let j = 0;
+        let i = 0;
         //Diagonal Winner
         if (playingBoard[j][j] === symbol && playingBoard[j+1][j+1] === symbol && playingBoard[j+2][j+2] === symbol){
             console.log(`Player ${user} wins with ${symbol}`);
@@ -94,11 +95,49 @@ const gameBoard = (function(){
     };
 }) ();
 
+// function turn(){
+//     const player1 = player(1,'X');
+//     const player2 = player(2,'O');
+//     const movements = [];
+
+//     const cells = document.querySelectorAll('[data-row][data-column]');
+    
+//     cells.forEach(cell => {
+//         cell.addEventListener('click', function() {
+//             // Get the row and column data attributes for the clicked cell
+//             let selectedRow = cell.getAttribute('data-row');
+//             let selectedColumn = cell.getAttribute('data-column');
+
+//             if(movements.length === 0){
+//                 player1.movement();
+//             }
+//             else if(movements[(movements.length-1)] === 1){
+//                 player2.movement();
+//             }
+//             else{
+//                 player1.movement();
+//             }
+            
+//             // Log the selected row and column
+//             console.log(`Player  chose row ${selectedRow} and column ${selectedColumn}`);
+            
+//             // Use the selected row and column inside the event listener
+//             let row = selectedRow;
+//             console.log(row);
+//         });
+//     });
+// }
 
 
 //Create users 
 function player(user,symbol){
-    const movements = [];
+    // const movements = [];
+    // if(movements.length === 0){
+    //     // player1.movement();
+    // }
+    // else{
+    //     // player2.movement();
+    // }
     return {
         user: user,
         symbol: symbol,
@@ -113,6 +152,6 @@ function player(user,symbol){
     }
 }
 
-const player1 = player(1,'X');
-const player2 = player(2,'O');
 
+    const player1 = player(1,'X');
+    const player2 = player(2,'O');
