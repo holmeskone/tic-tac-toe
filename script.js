@@ -98,40 +98,47 @@ const gameBoard = (function(){
 }) ();
 
 const movement = [];
-function turn() {
-    //Alternating turns
-    if (movement.length === 0) {
-        console.log(1);
-        movement.push(1);
-        document.addEventListener("click", function(event) {
-            // Only change the innerHTML if the clicked element has the class "cell"
-            if (event.target.classList.contains("cell")) {
-                event.target.innerHTML = "X";
+let playerNumberOne = 1;
+let playerNumberTwo = 2;
+
+
+function turn(event) {
+    // document.addEventListener("click", function(event) {
+    if (event.target.classList.contains("cell")) {
+        if(movement.length === 0){
+            movement.push(1);
+            console.log(movement);
+            let playerSymbol = "X";
+            event.target.innerHTML = playerSymbol;
+            let selectedRow = event.target.dataset.row;
+            let selectedColumn = event.target.dataset.column;
+            console.log(`Player number ${playerNumberOne} has selected the row ${selectedRow} and column ${selectedColumn}`);
+            gameBoard.currentBoard(playerNumberOne, selectedRow,selectedColumn,playerSymbol);
             }
-        });
-    }
-    else if (movement[(movement.length) - 1] === 1) {
-        console.log(2);
-        movement.push(2);
-        document.addEventListener("click", function(event) {
-            // Only change the innerHTML if the clicked element has the class "cell"
-            if (event.target.classList.contains("cell")) {
-                event.target.innerHTML = "O";
+        else if (movement[(movement.length)-1] != 1){
+            movement.push(1);
+            console.log(movement);
+            let playerSymbol = "X";
+            event.target.innerHTML = playerSymbol;
+            let selectedRow = event.target.dataset.row;
+            let selectedColumn = event.target.dataset.column;
+            console.log(`Player number ${playerNumberOne} has selected the row ${selectedRow} and column ${selectedColumn}`);
+            gameBoard.currentBoard(playerNumberOne, selectedRow,selectedColumn,playerSymbol);
             }
-        });
-    }
-    else {
-        console.log(1);
-        movement.push(1);
-        document.addEventListener("click", function(event) {
-            // Only change the innerHTML if the clicked element has the class "cell"
-            if (event.target.classList.contains("cell")) {
-                event.target.innerHTML = "X";
+
+        else if (movement[(movement.length)-1] === 1){
+            movement.push(2);
+            console.log(movement);
+            let playerSymbol = "O";
+            event.target.innerHTML = playerSymbol;
+            let selectedRow = event.target.dataset.row;
+            let selectedColumn = event.target.dataset.column;
+            console.log(`Player number ${playerNumberTwo} has selected the row ${selectedRow} and column ${selectedColumn}`);
+            gameBoard.currentBoard(playerNumberTwo, selectedRow,selectedColumn,playerSymbol);
             }
-        });
+        }
     }
-console.log(movement);
-}
+document.addEventListener("click", turn);
 
 //Create users 
 function player(user,symbol){
@@ -139,10 +146,117 @@ function player(user,symbol){
         user: user,
         symbol: symbol,
         movement: function(){
-            let row = prompt('What row?');
-            let cell = prompt('What cell?');            
+            let row = selectedRow;
+            console.log(row);          
             gameBoard.currentBoard(user, row,cell,symbol);
             console.log(`Player ${user} chose row ${row} and cell ${cell}`);
         },
     }
 }
+
+
+
+
+
+
+//     //Alternating turns
+//     if (movement.length === 0) {
+//         movement.push(playerNumberOne);
+//         console.log(playerNumberOne);
+//         document.addEventListener("click", function(event) {
+//             // Only change the innerHTML if the clicked element has the class "cell"
+//             if (event.target.classList.contains("cell") ) {
+//                 let playerSymbol = "X";
+//                 event.target.innerHTML = playerSymbol;
+//                 let selectedRow = event.target.dataset.row;
+//                 let selectedColumn = event.target.dataset.column;
+//                 console.log(`Player number ${playerNumberOne} has selected the row ${selectedRow} and column ${selectedColumn}`);
+//                 gameBoard.currentBoard(playerNumberOne, selectedRow,selectedColumn,playerSymbol);
+//             }
+//         });
+//     }
+//     else if (movement[(movement.length) - 1] === 1) {
+//         let playerNumberTwo = 2;
+//         console.log(playerNumberTwo);
+//         document.addEventListener("click", function(event) {
+//             // Only change the innerHTML if the clicked element has the class "cell"
+//             if (event.target.classList.contains("cell")) {
+//                 let playerSymbol = "O";
+//                 event.target.innerHTML = playerSymbol;
+//                 let selectedRow = event.target.dataset.row;
+//                 let selectedColumn = event.target.dataset.column;
+//                 console.log(`Player number ${playerNumberTwo} has selected the row ${selectedRow} and column ${selectedColumn}`);
+//                 gameBoard.currentBoard(playerNumberTwo, selectedRow,selectedColumn,playerSymbol);
+//             }
+//         });
+//     }
+//     else {
+//         movement.push(playerNumberOne);
+//         console.log(playerNumberOne);
+//         document.addEventListener("click", function(event) {
+//             // Only change the innerHTML if the clicked element has the class "cell"
+//             if (event.target.classList.contains("cell")) {
+//                 let playerSymbol = "X";
+//                 event.target.innerHTML = playerSymbol;
+//                 console.log(event.target.dataset.row);
+//                 let selectedRow = event.target.dataset.row;
+//                 let selectedColumn = event.target.dataset.column;
+//                 console.log(`The else statement: Player number ${playerNumberOne} has selected the row ${selectedRow} and column ${selectedColumn}`);
+//                 gameBoard.currentBoard(playerNumberOne, selectedRow,selectedColumn,playerSymbol);
+//             }
+//         });
+//     }
+// }
+
+
+
+// function turn() {
+//     console.log(movement);
+//     //Alternating turns
+//     if (movement.length === 0) {
+//         movement.push(playerNumberOne);
+//         console.log(playerNumberOne);
+//         document.addEventListener("click", function(event) {
+//             // Only change the innerHTML if the clicked element has the class "cell"
+//             if (event.target.classList.contains("cell") ) {
+//                 let playerSymbol = "X";
+//                 event.target.innerHTML = playerSymbol;
+//                 let selectedRow = event.target.dataset.row;
+//                 let selectedColumn = event.target.dataset.column;
+//                 console.log(`Player number ${playerNumberOne} has selected the row ${selectedRow} and column ${selectedColumn}`);
+//                 gameBoard.currentBoard(playerNumberOne, selectedRow,selectedColumn,playerSymbol);
+//             }
+//         });
+//     }
+//     else if (movement[(movement.length) - 1] === 1) {
+//         let playerNumberTwo = 2;
+//         console.log(playerNumberTwo);
+//         document.addEventListener("click", function(event) {
+//             // Only change the innerHTML if the clicked element has the class "cell"
+//             if (event.target.classList.contains("cell")) {
+//                 let playerSymbol = "O";
+//                 event.target.innerHTML = playerSymbol;
+//                 let selectedRow = event.target.dataset.row;
+//                 let selectedColumn = event.target.dataset.column;
+//                 console.log(`Player number ${playerNumberTwo} has selected the row ${selectedRow} and column ${selectedColumn}`);
+//                 gameBoard.currentBoard(playerNumberTwo, selectedRow,selectedColumn,playerSymbol);
+//             }
+//         });
+//     }
+//     else {
+//         movement.push(playerNumberOne);
+//         console.log(playerNumberOne);
+//         document.addEventListener("click", function(event) {
+//             // Only change the innerHTML if the clicked element has the class "cell"
+//             if (event.target.classList.contains("cell")) {
+//                 let playerSymbol = "X";
+//                 event.target.innerHTML = playerSymbol;
+//                 console.log(event.target.dataset.row);
+//                 let selectedRow = event.target.dataset.row;
+//                 let selectedColumn = event.target.dataset.column;
+//                 console.log(`The else statement: Player number ${playerNumberOne} has selected the row ${selectedRow} and column ${selectedColumn}`);
+//                 gameBoard.currentBoard(playerNumberOne, selectedRow,selectedColumn,playerSymbol);
+//             }
+//         });
+//     }
+// }
