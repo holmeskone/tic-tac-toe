@@ -23,21 +23,25 @@ const gameBoard = (function(){
         }
         else if (winnerChecker === 'Winner'){
             playingBoard = startBoard()
+            winnerChecker(user, symbol);
+
         }
         else{
             playingBoard[row][cell]=(symbol);
             console.log(playingBoard);
+            winnerChecker(user, symbol);
         }
-        winnerChecker(user, symbol);
     }
 
     function winnerChecker(user, symbol){
         let j = 0;
         let i = 0;
+        const winnerText = document.getElementById('winner-text');
         //Diagonal Winner
         if (playingBoard[j][j] === symbol && playingBoard[j+1][j+1] === symbol && playingBoard[j+2][j+2] === symbol){
             console.log(`Player ${user} wins with ${symbol}`);
-            let restart = prompt('Would you like to play again? Y/N');
+            // winnerText.style.display = "block";
+            let restart = prompt(`WE HAVE A WINNER, PLAYER ${user} WINS! Would you like to play again? Y/N`);
                 if(restart === 'Y'){
                     playingBoard = startBoard();
                     player1.movement();
