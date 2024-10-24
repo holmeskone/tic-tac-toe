@@ -14,6 +14,8 @@ const gameBoard = (function(){
     }
 
     let playingBoard = startBoard();
+    const player1 = player(1,'X');
+    const player2 = player(2,'O');
     
     function currentBoard(user,row,cell,symbol){
         if(playingBoard[row][cell]!=''){
@@ -95,49 +97,44 @@ const gameBoard = (function(){
     };
 }) ();
 
-// function turn(){
-//     const player1 = player(1,'X');
-//     const player2 = player(2,'O');
-//     const movements = [];
-
-//     const cells = document.querySelectorAll('[data-row][data-column]');
-    
-//     cells.forEach(cell => {
-//         cell.addEventListener('click', function() {
-//             // Get the row and column data attributes for the clicked cell
-//             let selectedRow = cell.getAttribute('data-row');
-//             let selectedColumn = cell.getAttribute('data-column');
-
-//             if(movements.length === 0){
-//                 player1.movement();
-//             }
-//             else if(movements[(movements.length-1)] === 1){
-//                 player2.movement();
-//             }
-//             else{
-//                 player1.movement();
-//             }
-            
-//             // Log the selected row and column
-//             console.log(`Player  chose row ${selectedRow} and column ${selectedColumn}`);
-            
-//             // Use the selected row and column inside the event listener
-//             let row = selectedRow;
-//             console.log(row);
-//         });
-//     });
-// }
-
+const movement = [];
+function turn() {
+    //Alternating turns
+    if (movement.length === 0) {
+        console.log(1);
+        movement.push(1);
+        document.addEventListener("click", function(event) {
+            // Only change the innerHTML if the clicked element has the class "cell"
+            if (event.target.classList.contains("cell")) {
+                event.target.innerHTML = "X";
+            }
+        });
+    }
+    else if (movement[(movement.length) - 1] === 1) {
+        console.log(2);
+        movement.push(2);
+        document.addEventListener("click", function(event) {
+            // Only change the innerHTML if the clicked element has the class "cell"
+            if (event.target.classList.contains("cell")) {
+                event.target.innerHTML = "O";
+            }
+        });
+    }
+    else {
+        console.log(1);
+        movement.push(1);
+        document.addEventListener("click", function(event) {
+            // Only change the innerHTML if the clicked element has the class "cell"
+            if (event.target.classList.contains("cell")) {
+                event.target.innerHTML = "X";
+            }
+        });
+    }
+console.log(movement);
+}
 
 //Create users 
 function player(user,symbol){
-    // const movements = [];
-    // if(movements.length === 0){
-    //     // player1.movement();
-    // }
-    // else{
-    //     // player2.movement();
-    // }
     return {
         user: user,
         symbol: symbol,
@@ -146,12 +143,6 @@ function player(user,symbol){
             let cell = prompt('What cell?');            
             gameBoard.currentBoard(user, row,cell,symbol);
             console.log(`Player ${user} chose row ${row} and cell ${cell}`);
-            histMovements = movements.push(user);
-            console.log(histMovements);
         },
     }
 }
-
-
-    const player1 = player(1,'X');
-    const player2 = player(2,'O');
