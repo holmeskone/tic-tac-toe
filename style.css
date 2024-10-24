@@ -1,5 +1,6 @@
 :root{
     background-color: aliceblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /*Prevent any scrolling*/
@@ -34,11 +35,16 @@ html, body {
 }
 /*Each Cell*/
 .game-row .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 20vh;
     width: 15vw;
     background-color: orange;
     border-width: 3px;
     border:1px solid black;
+    font-size: 6rem;
+    text-align: center;
 }
 
 /*Score board*/
