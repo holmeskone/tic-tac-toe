@@ -27,17 +27,30 @@ const gameBoard = (function(){
         if(playingBoard[row][cell]!=''){
             console.log('Cell already taken');
         }
-        else if (winnerChecker === 'Winner'){
-            playingBoard = startBoard();
-            winnerChecker(user, symbol);
-
-        }
         else{
             playingBoard[row][cell]=(symbol);
-            console.log(playingBoard);
-            winnerChecker(user, symbol);
+            const winnerStatus = winnerChecker(user,symbol);
+            const startButton=document.getElementById("next-game");
+            const cells = document.getElementsByClassName('cell');
+            startButton.addEventListener('click', function(e){
+            if (winnerStatus === 'Winner'){
+                playingBoard = startBoard();
+                console.log(playingBoard);
+                Array.from(cells).forEach(function(cell) {
+                    cell.innerHTML = "";
+                    cell.style.background = 'orange';
+                    cell.style.color = 'black';
+                });
+            }
+            })
+            const restartButton=document.getElementById("restart");
+            restartButton.addEventListener('click', function(e){
+                if (winnerStatus === 'Winner'){
+                    location.reload();}
+                })
         }
     }
+
 
     function winnerChecker(user, symbol){
         let j = 0;
@@ -50,19 +63,7 @@ const gameBoard = (function(){
             document.getElementById('11').style.color = 'white';
             document.getElementById('22').style.background = 'blue';
             document.getElementById('22').style.color = 'white';
-            // Next game
-            const startButton=document.getElementById("start");
-            startButton.addEventListener('click', function(e){
-                console.log('Hello Star')
-            })
-
-            //Restart
-            const restartButton=document.getElementById("restart");
-            restartButton.addEventListener('click', function(e){
-                console.log('helloworldRestart')
-                location.reload();
-            })
-
+        return "Winner";
         }
         // A draw!
         else if(playingBoard[j][i] !='' && playingBoard[j+1][i+1] !='' && playingBoard[j+2][i+2] !='' &&
@@ -100,6 +101,7 @@ const gameBoard = (function(){
                         console.log('helloworldRestart')
                         location.reload();
                     })
+                    return "Winner"
                 }
                     
                 //Column Winner
@@ -112,7 +114,7 @@ const gameBoard = (function(){
                     document.getElementById(`${j+2}${i}`).style.color = 'white';
                     console.log(`Player ${user} wins with ${symbol}`);
                     // Next game
-                    const startButton=document.getElementById("start");
+                    const startButton=document.getElementById("next-game");
                     startButton.addEventListener('click', function(e){
                         console.log('Hello Star')
                     })
