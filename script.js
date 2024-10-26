@@ -36,6 +36,8 @@ const gameBoard = (function(){
             if (winnerStatus === 'Winner'){
                 playingBoard = startBoard();
                 console.log(playingBoard);
+                let winnerArea = document.getElementById('winner-text');
+                winnerArea.innerHTML = '';
                 Array.from(cells).forEach(function(cell) {
                     cell.innerHTML = "";
                     cell.style.background = 'orange';
@@ -50,11 +52,12 @@ const gameBoard = (function(){
                 })
         }
     }
-
+    
 
     function winnerChecker(user, symbol){
         let j = 0;
         let i = 0;
+        let count = 1;
         //Diagonal Winner
         if (playingBoard[j][j] === symbol && playingBoard[j+1][j+1] === symbol && playingBoard[j+2][j+2] === symbol){
             document.getElementById('00').style.background = 'blue';
@@ -63,6 +66,9 @@ const gameBoard = (function(){
             document.getElementById('11').style.color = 'white';
             document.getElementById('22').style.background = 'blue';
             document.getElementById('22').style.color = 'white';
+            let winnerArea = document.getElementById('winner-text');
+            winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`);
+            updateText(`${user}`)
         return "Winner";
         }
         // A draw!
@@ -88,19 +94,8 @@ const gameBoard = (function(){
                     document.getElementById(`${i}${j+1}`).style.color = 'white';
                     document.getElementById(`${i}${j+2}`).style.background = 'blue';
                     document.getElementById(`${i}${j+2}`).style.color = 'white';
-                    console.log(`Player ${user} wins with ${symbol}`);
-                     // Next game
-                    const startButton=document.getElementById("start");
-                    startButton.addEventListener('click', function(e){
-                        console.log('Hello Star')
-                    })
-
-                    //Restart
-                    const restartButton=document.getElementById("restart");
-                    restartButton.addEventListener('click', function(e){
-                        console.log('helloworldRestart')
-                        location.reload();
-                    })
+                    let winnerArea = document.getElementById('winner-text');
+                    winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`)
                     return "Winner"
                 }
                     
@@ -113,21 +108,16 @@ const gameBoard = (function(){
                     document.getElementById(`${j+2}${i}`).style.background = 'blue';
                     document.getElementById(`${j+2}${i}`).style.color = 'white';
                     console.log(`Player ${user} wins with ${symbol}`);
-                    // Next game
-                    const startButton=document.getElementById("next-game");
-                    startButton.addEventListener('click', function(e){
-                        console.log('Hello Star')
-                    })
-
-                    //Restart
-                    const restartButton=document.getElementById("restart");
-                    restartButton.addEventListener('click', function(e){
-                        console.log('helloworldRestart')
-                        location.reload();
-                    })
+                    let winnerArea = document.getElementById('winner-text');
+                    winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`)
                 }
             }
 
+        function updateText(user) {
+            let winnerPlayer = document.querySelector(`#player-${user} span`);
+            winnerPlayer.innerHTML = count; // Set innerHTML to the current count
+            count++;                // Increment the count
+        }
         }
 
 
