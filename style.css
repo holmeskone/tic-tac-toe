@@ -13,14 +13,42 @@ html, body {
 /*The main section of the page*/
 #container{
     display: grid;
-    grid-template-rows: 1fr 4fr 2.5fr;
+    grid-template-rows: 1fr 3fr 2fr;
+    margin: 2rem 0rem 2rem;
 }
 /*The title*/
 #game-title{
     font-size: 1.5rem;
-    display: flex;
+    display: grid;
     color: black;
     justify-content: center;
+    padding-bottom: 1rem;
+}
+
+#game-title h2{
+    font-size: 3rem;
+    height: 3rem;
+    margin: 0px;
+}
+
+#game-title #winner-text{
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0px;
+}
+
+#game-title .options{
+    display: flex;
+    justify-content: space-around;
+}
+
+#game-title .options button{
+    font-size: 1rem;
+    background-color: blue;
+    color: aliceblue;
+    border-radius: 5px;
+    border: 0px;
+    justify-self: center;
 }
 
 /*The board*/
@@ -50,11 +78,15 @@ html, body {
 /*Score board*/
 #game-information{
     display: grid;
-    
+    padding-top: 1rem;
 }
 
 #game-counter{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
+}
+
+.result{
+    text-align: center;
 }
