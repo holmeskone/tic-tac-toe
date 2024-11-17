@@ -57,7 +57,7 @@ const gameBoard = (function(){
     function winnerChecker(user, symbol){
         let j = 0;
         let i = 0;
-        let count = 1;
+
         //Diagonal Winner
         if (playingBoard[j][j] === symbol && playingBoard[j+1][j+1] === symbol && playingBoard[j+2][j+2] === symbol){
             document.getElementById('00').style.background = 'blue';
@@ -95,8 +95,11 @@ const gameBoard = (function(){
                     document.getElementById(`${i}${j+2}`).style.background = 'blue';
                     document.getElementById(`${i}${j+2}`).style.color = 'white';
                     let winnerArea = document.getElementById('winner-text');
-                    winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`)
-                    return "Winner"
+                    winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`);
+                    let WinnerUser = (`${user}`);
+                    console.log(WinnerUser);
+                    updateText(WinnerUser);
+                    return "Winner";
                 }
                     
                 //Column Winner
@@ -109,19 +112,32 @@ const gameBoard = (function(){
                     document.getElementById(`${j+2}${i}`).style.color = 'white';
                     console.log(`Player ${user} wins with ${symbol}`);
                     let winnerArea = document.getElementById('winner-text');
-                    winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`)
+                    winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`);
+                    updateText(`${user}`);
+                    return "Winner";
                 }
             }
 
         function updateText(user) {
-            let winnerPlayer = document.querySelector(`#player-${user} span`);
-            winnerPlayer.innerHTML = count; // Set innerHTML to the current count
-            count++;                // Increment the count
+            let winnerPlayerOne = document.querySelector(`#player-1 span`);
+            let winnerPlayerTwo = document.querySelector(`#player-2 span`);
+            if(user='1'){
+                console.log('Winner is 1')
+                winnerPlayerOne.innerHTML = countPlayerOne; // Set innerHTML to the current count
+                countPlayerOne++;          // Increment the count
+            }
+            else{
+                console.log('Winner is 2')
+                winnerPlayerTwo.innerHTML = countPlayerTwo; // Set innerHTML to the current count
+                countPlayerTwo++;          // Increment the count
+            }
         }
-        }
+    }
 
 
     const movement = [];
+    let countPlayerOne = 1;
+    let countPlayerTwo = 1;
     let playerNumberOne = 1;
     let playerNumberTwo = 2;
         
