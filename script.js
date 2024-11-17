@@ -68,7 +68,9 @@ const gameBoard = (function(){
             document.getElementById('22').style.color = 'white';
             let winnerArea = document.getElementById('winner-text');
             winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`);
-            updateText(`${user}`)
+            let WinnerUser = Number(`${user}`);
+            console.log(typeof(WinnerUser));
+            updateText(WinnerUser);
         return "Winner";
         }
         // A draw!
@@ -96,8 +98,8 @@ const gameBoard = (function(){
                     document.getElementById(`${i}${j+2}`).style.color = 'white';
                     let winnerArea = document.getElementById('winner-text');
                     winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`);
-                    let WinnerUser = (`${user}`);
-                    console.log(WinnerUser);
+                    let WinnerUser = Number(`${user}`);
+                    console.log(typeof(WinnerUser));
                     updateText(WinnerUser);
                     return "Winner";
                 }
@@ -113,7 +115,9 @@ const gameBoard = (function(){
                     console.log(`Player ${user} wins with ${symbol}`);
                     let winnerArea = document.getElementById('winner-text');
                     winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`);
-                    updateText(`${user}`);
+                    let WinnerUser = Number(`${user}`);
+                    console.log(typeof(WinnerUser));
+                    updateText(WinnerUser);
                     return "Winner";
                 }
             }
@@ -121,7 +125,7 @@ const gameBoard = (function(){
         function updateText(user) {
             let winnerPlayerOne = document.querySelector(`#player-1 span`);
             let winnerPlayerTwo = document.querySelector(`#player-2 span`);
-            if(user='1'){
+            if(user===1){
                 console.log('Winner is 1')
                 winnerPlayerOne.innerHTML = countPlayerOne; // Set innerHTML to the current count
                 countPlayerOne++;          // Increment the count
