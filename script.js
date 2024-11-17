@@ -94,13 +94,11 @@ const gameBoard = (function(){
             playingBoard[j+1][i] !='' && playingBoard[j+1][i+1] !='' && playingBoard[j+1][i+2] !='' &&
             playingBoard[j+2][i] !='' && playingBoard[j+2][i+1] !='' && playingBoard[j+2][i+2] !=''){
             console.log(`It's a draw!`)
-            let restart = prompt('Would you like to play again? Y/N');
-                if(restart === 'Y'){
-                    playingBoard = startBoard();
-                }
-                else{
-                    console.log(playingBoard);
-                }
+            let winnerArea = document.getElementById('winner-text');
+            winnerArea.innerHTML = (`It's a draw!`);
+            let WinnerUser = 'none';
+            updateText(WinnerUser);
+            return "Winner";
             }
 
         for(i = 0; i<3; i++){
@@ -141,15 +139,21 @@ const gameBoard = (function(){
         function updateText(user) {
             let winnerPlayerOne = document.querySelector(`#player-1 span`);
             let winnerPlayerTwo = document.querySelector(`#player-2 span`);
+            let noWinner = document.querySelector(`#tie span`);
             if(user===1){
                 console.log('Winner is 1')
                 winnerPlayerOne.innerHTML = countPlayerOne; // Set innerHTML to the current count
                 countPlayerOne++;          // Increment the count
             }
-            else{
+            else if (user===2) {
                 console.log('Winner is 2')
                 winnerPlayerTwo.innerHTML = countPlayerTwo; // Set innerHTML to the current count
                 countPlayerTwo++;          // Increment the count
+            }
+            else if (user='none') {
+                console.log(`It's a tie`)
+                noWinner.innerHTML = countTie; // Set innerHTML to the current count
+                countTie++;          // Increment the count
             }
         }
     }
@@ -158,6 +162,7 @@ const gameBoard = (function(){
     const movement = [];
     let countPlayerOne = 1;
     let countPlayerTwo = 1;
+    let countTie = 1;
     let playerNumberOne = 1;
     let playerNumberTwo = 2;
         
@@ -208,17 +213,4 @@ const gameBoard = (function(){
     };
 }) ();
 
-
-// //Create users 
-// function player(user,symbol){
-//     return {
-//         user: user,
-//         symbol: symbol,
-//         movement: function(){
-//             let row = selectedRow;
-//             gameBoard.currentBoard(user, row,cell,symbol);
-//             console.log(`Player ${user} chose row ${row} and cell ${cell}`);
-//         },
-//     }
-// }
 
