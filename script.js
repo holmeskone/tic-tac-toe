@@ -26,6 +26,7 @@ const gameBoard = (function(){
     function currentBoard(user,row,cell,symbol){
         if(playingBoard[row][cell]!=''){
             console.log('Cell already taken');
+            return;
         }
         else{
             playingBoard[row][cell]=(symbol);
@@ -66,6 +67,21 @@ const gameBoard = (function(){
             document.getElementById('11').style.color = 'white';
             document.getElementById('22').style.background = 'blue';
             document.getElementById('22').style.color = 'white';
+            let winnerArea = document.getElementById('winner-text');
+            winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`);
+            let WinnerUser = Number(`${user}`);
+            console.log(typeof(WinnerUser));
+            updateText(WinnerUser);
+        return "Winner";
+        }
+        //Another diagonal sequence that wins
+        else if (playingBoard[j+2][j] === symbol && playingBoard[j+1][j+1] === symbol && playingBoard[j][j+2] === symbol){
+            document.getElementById('20').style.background = 'blue';
+            document.getElementById('20').style.color = 'white';
+            document.getElementById('11').style.background = 'blue';
+            document.getElementById('11').style.color = 'white';
+            document.getElementById('02').style.background = 'blue';
+            document.getElementById('02').style.color = 'white';
             let winnerArea = document.getElementById('winner-text');
             winnerArea.innerHTML = (`Player ${user} wins with ${symbol}`);
             let WinnerUser = Number(`${user}`);
@@ -148,7 +164,7 @@ const gameBoard = (function(){
         
     function turn(event) {
         // document.addEventListener("click", function(event) {
-        if (event.target.classList.contains("cell")) {
+        if ((event.target.classList.contains("cell")) && (event.target.innerHTML === '')) {
             if(movement.length === 0){
                 movement.push(1);
                 console.log(movement);
